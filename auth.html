@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login / Register - Pawfect Match</title>
+        <link rel="stylesheet" type="text/css" href="Page1.css">
+        <link rel="stylesheet" type="text/css" href="auth.css">
+    </head>
+    <body class="back">
+        <div class="nav-bar">
+            <ul>
+                <li class="b">Pawfect Match </li>
+                <div class="nav-links">
+                    <li><a href="Page1.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="Vol.html">Volunteering</a></li>
+                    <li><a href="Support.html">Support</a></li>
+                </div>
+            </ul>
+        </div>
+
+        <main>
+            <section class="auth-wrapper">
+                <h2 class="section-title" style="margin-bottom:10px;">Account Access</h2>
+
+                <div class="role-toggle">
+                    <button id="userBtn" class="role-btn active">User</button>
+                    <button id="adminBtn" class="role-btn">Admin</button>
+                </div>
+
+                <div id="userArea" class="role-area">
+                    <div class="sub-toggle">
+                        <button id="uLoginBtn" class="sub-btn active">Login</button>
+                        <button id="uRegisterBtn" class="sub-btn">Register</button>
+                    </div>
+
+                    <div id="uLogin" class="form-box">
+                        <form method="post" action="login.php">
+                            <label for="uemail">Email</label>
+                            <input id="uemail" name="email" type="email" required>
+                            <label for="upass">Password</label>
+                            <input id="upass" name="password" type="password" required>
+                            <button type="submit" class="primary">Login</button>
+                        </form>
+                    </div>
+
+                    <div id="uRegister" class="form-box hidden">
+                        <form method="post" action="register.php">
+                            <label for="uname">Full Name</label>
+                            <input id="uname" name="name" type="text" required>
+                            <label for="uemailr">Email</label>
+                            <input id="uemailr" name="email" type="email" required>
+                            <label for="upassr">Password</label>
+                            <input id="upassr" name="password" type="password" required>
+                            <button type="submit" class="primary">Register</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="adminArea" class="role-area hidden">
+                    <div class="form-box">
+                        <form method="post" action="admin_login.php">
+                            <label for="adminuser">Admin Username</label>
+                            <input id="adminuser" name="username" type="text" required>
+                            <label for="adminpass">Password</label>
+                            <input id="adminpass" name="password" type="password" required>
+                            <button type="submit" class="primary">Admin Login</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <h3>Pawfect Match</h3>
+                <p>Connecting pets with loving homes.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="year2"></span> Pawfect Match. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script>
+            document.getElementById('year2').textContent = new Date().getFullYear();
+
+            const userBtn = document.getElementById('userBtn');
+            const adminBtn = document.getElementById('adminBtn');
+            const userArea = document.getElementById('userArea');
+            const adminArea = document.getElementById('adminArea');
+
+            const uLoginBtn = document.getElementById('uLoginBtn');
+            const uRegisterBtn = document.getElementById('uRegisterBtn');
+            const uLogin = document.getElementById('uLogin');
+            const uRegister = document.getElementById('uRegister');
+
+            function showUser() {
+                userBtn.classList.add('active');
+                adminBtn.classList.remove('active');
+                userArea.classList.remove('hidden');
+                adminArea.classList.add('hidden');
+            }
+
+            function showAdmin() {
+                adminBtn.classList.add('active');
+                userBtn.classList.remove('active');
+                adminArea.classList.remove('hidden');
+                userArea.classList.add('hidden');
+            }
+
+            function showULogin() {
+                uLoginBtn.classList.add('active');
+                uRegisterBtn.classList.remove('active');
+                uLogin.classList.remove('hidden');
+                uRegister.classList.add('hidden');
+            }
+
+            function showURegister() {
+                uRegisterBtn.classList.add('active');
+                uLoginBtn.classList.remove('active');
+                uRegister.classList.remove('hidden');
+                uLogin.classList.add('hidden');
+            }
+
+            userBtn.addEventListener('click', showUser);
+            adminBtn.addEventListener('click', showAdmin);
+            uLoginBtn.addEventListener('click', showULogin);
+            uRegisterBtn.addEventListener('click', showURegister);
+
+            // No confirm-password check (single password field used)
+        </script>
+    </body>
+</html>

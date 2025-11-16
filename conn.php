@@ -1,7 +1,6 @@
 <?php
-// ...existing code...
-<?php
 // DB connection using PDO. Edit the constants below for your environment.
+// When you run this on XAMPP, update DB_NAME, DB_USER and DB_PASS accordingly.
 define('DB_HOST', '127.0.0.1');
 define('DB_PORT', '3306');
 define('DB_NAME', 'your_database'); // <- change to your DB name
@@ -36,5 +35,5 @@ function getPDO(): PDO {
     global $pdo;
     return $pdo;
 }
-?>
-// ...existing code...
+
+// Note: intentionally omitting the PHP closing tag to avoid accidental trailing output.

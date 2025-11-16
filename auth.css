@@ -1,0 +1,38 @@
+/* Styles for auth page, using the same color palette as Page1.css */
+.auth-wrapper {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(255,214,165,0.9), rgba(255,255,255,0.85));
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border: 2px dotted rgba(0,0,0,0.12);
+}
+
+.role-toggle { display:flex; gap:12px; justify-content:center; margin-bottom:14px; }
+.role-btn { background:#051650; color:#fff; border:none; padding:10px 18px; border-radius:8px; cursor:pointer; font-size:16px; }
+.role-btn.active { background:#FFD6A5; color:#051650; font-weight:bold; }
+
+.sub-toggle { display:flex; gap:10px; justify-content:center; margin:10px 0 18px; }
+.sub-btn { background:transparent; border:2px solid transparent; padding:8px 14px; border-radius:8px; cursor:pointer; }
+.sub-btn.active { background:#051650; color:#fff; }
+
+.form-box { max-width:420px; margin:0 auto 10px; }
+.form-box form { display:flex; flex-direction:column; gap:10px; }
+.form-box label { font-weight:600; color:#333; }
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="password"] {
+  padding:10px 12px; border-radius:8px; border:1px solid #ccc; font-size:15px;
+}
+.form-box input:focus { outline:none; border-color:#051650; box-shadow:0 0 0 3px rgba(5,22,80,0.08); }
+
+.primary { background:#051650; color:#fff; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; font-size:16px; }
+.primary:hover { background:#07306f; }
+
+.hidden { display:none; }
+
+@media (max-width:600px) {
+  .auth-wrapper { margin: 20px; padding:16px; }
+  .adoption-quote { font-size:32px; }
+}
