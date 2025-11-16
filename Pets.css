@@ -1,0 +1,255 @@
+/* Pets.css - aligned with the same look as other pages (Vol.css / site-wide styles) */
+
+:root{
+    --brand:#2c7a7b;
+    --brand-dark:#24635f;
+    --bg:#f4f7f8;
+    --muted:#6b7280;
+    --card:#ffffff;
+    --accent:#e6fffb;
+    --accent-2:#d1f6f2;
+    --text:#0f1724;
+    --glass: rgba(255,255,255,0.6);
+    --shadow: 0 6px 24px rgba(16,24,40,0.08);
+    --radius:12px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin:0;
+    background:linear-gradient(180deg,var(--bg) 0%, #eef6f5 100%);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+}
+
+/* NAV */
+.nav-bar{
+    background:linear-gradient(90deg,var(--brand) 0%, var(--brand-dark) 100%);
+    color:#fff;
+    padding:14px 24px;
+    box-shadow: 0 2px 6px rgba(12,20,18,0.08);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+.nav-bar ul{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:18px;max-width:1100px;margin-inline:auto}
+.nav-bar .b{font-weight:800;margin-right:6px;font-size:1.1rem;letter-spacing:0.2px}
+.nav-links{display:flex;gap:10px;margin-left:auto}
+.nav-links li{list-style:none}
+.nav-links a{
+    color:#fff;
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:8px;
+    display:inline-block;
+    font-weight:600;
+    opacity:0.95;
+    transition:transform .12s ease, background .12s ease, opacity .12s ease;
+}
+.nav-links a:hover{ background: rgba(255,255,255,0.08); transform:translateY(-2px); opacity:1; }
+
+
+/* LAYOUT */
+.container{
+    max-width:1100px;
+    margin:28px auto;
+    padding:16px;
+}
+.container h1{
+    margin:6px 0 16px;
+    font-size:1.6rem;
+    letter-spacing:0.2px;
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* Filters area - consistent with form spacing used in Vol.css */
+.filters{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+    background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));
+    padding:12px;
+    border-radius:10px;
+    box-shadow: var(--shadow);
+    border:1px solid rgba(0,0,0,0.03);
+}
+.type-filters{display:flex;gap:8px;align-items:center}
+.type-filters label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(0,0,0,0.03);
+    cursor:pointer;
+    font-weight:600;
+    color:var(--muted);
+    transition:background .12s ease, color .12s ease, transform .12s ease;
+}
+
+.type-filters input{display:none}
+.type-filters label.active, .type-filters label:hover{
+    background:var(--accent-2);
+    color:var(--brand-dark);
+    transform:translateY(-2px);
+    box-shadow: 0 4px 12px rgba(20,60,56,0.06);
+}
+.species-filter{display:flex;align-items:center;gap:8px}
+.species-filter label{font-weight:600;color:var(--muted)}
+#speciesSelect{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid #e6eef0;
+    background:linear-gradient(180deg,#fff,#fcffff);
+    min-width:160px;
+    font-weight:600;
+    color:var(--text);
+}
+
+.search-filter{margin-left:auto;display:flex;align-items:center;gap:8px}
+#searchInput{
+    padding:10px 14px;
+    width:220px;
+    border:1px solid #e6eef0;
+    border-radius:10px;
+    background:#fff;
+    box-shadow:0 2px 6px rgba(12,20,18,0.03) inset;
+}
+
+/* PET GRID - cards styled to match other pages' card look */
+.pets-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+    gap:18px;
+    margin-top:12px;
+}
+.pet-card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:12px;
+    box-shadow:var(--shadow);
+    transition:transform .16s ease, box-shadow .16s ease;
+    min-height:280px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(10,20,20,0.03);
+}
+.pet-card:hover{transform:translateY(-8px);box-shadow:0 12px 34px rgba(16,24,40,0.12)}
+.pet-media{
+    position:relative;
+    border-radius:10px;
+    overflow:hidden;
+    height:160px;
+    margin-bottom:10px;
+    background:linear-gradient(180deg,#f8fafb,#eef6f5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.pet-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.badges{
+    position:absolute;
+    top:12px;
+    left:12px;
+    display:flex;
+    gap:8px;
+}
+.badge{
+    background:rgba(255,255,255,0.9);
+    color:var(--brand-dark);
+    padding:6px 8px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:0.8rem;
+    box-shadow:0 4px 10px rgba(20,60,56,0.06);
+}
+.age-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:rgba(0,0,0,0.6);
+    color:#fff;
+    padding:6px 8px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:0.8rem;
+}
+.pet-body{
+    padding:6px 2px 4px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex:1 1 auto;
+}
+.pet-card h3{
+    margin:0;
+    font-size:1.05rem;
+    color:var(--text);
+}
+.pet-card .meta{color:var(--muted);font-size:0.92rem;margin-bottom:2px}
+.pet-card p{margin:0;color:#334155;font-size:0.95rem}
+.pet-actions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    margin-top:auto;
+}
+.btn{
+    padding:8px 12px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    font-weight:700;
+    transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn-light{
+    background:transparent;
+    color:var(--brand-dark);
+    border:1px solid rgba(36,99,95,0.08);
+}
+.btn-primary{
+    background:linear-gradient(180deg,var(--brand) 0%, var(--brand-dark) 100%);
+    color:#fff;
+    box-shadow: 0 6px 16px rgba(36,99,95,0.16);
+}
+.btn-primary:hover{transform:translateY(-2px)}
+
+/* Footer - same structure as Vol.css */
+.footer{
+    margin-top:36px;
+    background:#101529;
+    color:#fff;
+    padding:22px 0;
+}
+.footer .footer-content{text-align:center}
+.footer-bottom{text-align:center;margin-top:8px;font-size:0.9rem;color:#cbd5e1}
+
+/* Responsive tweaks */
+@media (max-width:900px){
+    .container{padding:12px}
+    #searchInput{width:160px}
+}
+@media (max-width:600px){
+    .nav-bar ul{flex-wrap:wrap}
+    #searchInput{width:120px}
+    .pets-grid{grid-template-columns:repeat(1,1fr)}
+    .badges{left:10px;top:10px}
+    .age-badge{right:10px;top:10px}
+}
+/* Pets.css - aligned with the same look as other

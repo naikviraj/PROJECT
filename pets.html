@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Pawfect Match — Pets</title>
+    <link rel="stylesheet" href="Pets.css">
+</head>
+<body>
+    <header class="nav-bar">
+        <ul>
+            <li class="b">Pawfect Match</li>
+            <div class="nav-links">
+                <li><a href="Page1.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="Vol.html">Volunteering</a></li>
+                <li><a href="Support.html">Support</a></li>
+            </div>
+        </ul>
+    </header>
+
+    <main class="container">
+        <h1>Available Pets</h1>
+
+        <section class="filters">
+            <div class="type-filters">
+                <label><input type="radio" name="type" value="all" checked> All</label>
+                <label><input type="radio" name="type" value="dog"> Dogs</label>
+                <label><input type="radio" name="type" value="cat"> Cats</label>
+            </div>
+
+            <div class="species-filter">
+                <label for="speciesSelect">Species / Breed:</label>
+                <select id="speciesSelect">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="search-filter">
+                <input id="searchInput" placeholder="Search by name..." />
+            </div>
+        </section>
+
+        <section id="petsGrid" class="pets-grid">
+            <!-- Example pet cards. Add or remove cards as needed. -->
+            <article class="pet-card" data-type="dog" data-species="labrador">
+                <img src="./IMAGES/dog5.png" alt="Buddy (Labrador)">
+                <h3>Buddy</h3>
+                <p class="meta">Dog — Labrador</p>
+                <p>Age: 3 • Friendly and energetic.</p>
+            </article>
+
+            <article class="pet-card" data-type="dog" data-species="beagle">
+                <img src="./IMAGES/dog1.jpg" alt="Milo (Beagle)">
+                <h3>Milo</h3>
+                <p class="meta">Dog — Beagle</p>
+                <p>Age: 2 • Loves walks and toys.</p>
+            </article>
+
+            <article class="pet-card" data-type="cat" data-species="siamese">
+                <img src="./IMAGES/dog2.jpg" alt="Luna (Siamese)">
+                <h3>Luna</h3>
+                <p class="meta">Cat — Siamese</p>
+                <p>Age: 1 • Quiet and affectionate.</p>
+            </article>
+
+            <article class="pet-card" data-type="cat" data-species="maine-coon">
+                <img src="assets/cat2.jpg" alt="Shadow (Maine Coon)">
+                <h3>Shadow</h3>
+                <p class="meta">Cat — Maine Coon</p>
+                <p>Age: 4 • Large, gentle, great with kids.</p>
+            </article>
+
+            <article class="pet-card" data-type="dog" data-species="mixed">
+                <img src="assets/dog3.jpg" alt="Pepper (Mixed)">
+                <h3>Pepper</h3>
+                <p class="meta">Dog — Mixed Breed</p>
+                <p>Age: 5 • Calm and house-trained.</p>
+            </article>
+
+            <article class="pet-card" data-type="cat" data-species="domestic-shorthair">
+                <img src="assets/cat3.jpg" alt="Whiskers (Domestic Shorthair)">
+                <h3>Whiskers</h3>
+                <p class="meta">Cat — Domestic Shorthair</p>
+                <p>Age: 2 • Playful and curious.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Pawfect Match</h3>
+            <p>Connecting pets with loving homes.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="year"></span> Pawfect Match. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Populate species select from pets in grid and handle filtering
+    (function() {
+        const petsGrid = document.getElementById('petsGrid');
+        const speciesSelect = document.getElementById('speciesSelect');
+        const typeRadios = document.querySelectorAll('input[name="type"]');
+        const searchInput = document.getElementById('searchInput');
+
+        function collectSpecies(filterType) {
+            const speciesSet = new Set();
+            const cards = petsGrid.querySelectorAll('.pet-card');
+            cards.forEach(card => {
+                const type = card.dataset.type;
+                const species = card.dataset.species;
+                if (filterType === 'all' || filterType === type) speciesSet.add(species);
+            });
+            return Array.from(speciesSet).sort();
+        }
+
+        function rebuildSpeciesOptions(type) {
+            const species = collectSpecies(type);
+            speciesSelect.innerHTML = '<option value="all">All</option>';
+            species.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s.replace(/-/g, ' ');
+                speciesSelect.appendChild(opt);
+            });
+        }
+
+        function applyFilters() {
+            const selectedType = document.querySelector('input[name="type"]:checked').value;
+            const selectedSpecies = speciesSelect.value;
+            const q = searchInput.value.trim().toLowerCase();
+
+            const cards = petsGrid.querySelectorAll('.pet-card');
+            cards.forEach(card => {
+                const type = card.dataset.type;
+                const species = card.dataset.species;
+                const name = (card.querySelector('h3') || { textContent: '' }).textContent.toLowerCase();
+
+                let visible = true;
+                if (selectedType !== 'all' && type !== selectedType) visible = false;
+                if (selectedSpecies !== 'all' && species !== selectedSpecies) visible = false;
+                if (q && !name.includes(q)) visible = false;
+
+                card.style.display = visible ? '' : 'none';
+            });
+        }
+
+        // initial build
+        rebuildSpeciesOptions('all');
+        applyFilters();
+
+        typeRadios.forEach(r => r.addEventListener('change', (e) => {
+            rebuildSpeciesOptions(e.target.value);
+            speciesSelect.value = 'all';
+            applyFilters();
+        }));
+
+        speciesSelect.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

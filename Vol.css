@@ -1,0 +1,174 @@
+body, html {
+    margin: 0; 
+    padding: 0;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 100px;
+    line-height: 80px;
+    background-color: #051650;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px; 
+    align-items: center;
+    padding-right: 20px;
+}
+.nav-links {
+    display: flex; 
+    gap: 20px;
+    align-items: center; 
+}
+.nav-links li {
+    line-height: normal;
+}
+a{
+    display: block;
+    padding: 20px 20px;
+    border-radius: 6px;
+    color: antiquewhite;
+    text-decoration: none;
+}
+a:hover {
+    background-color: #FFD6A5;
+    color: #051650;
+}
+.b{
+    font-size: 40px;
+    font-weight: bold;
+    padding-left: 50px;
+    color: #98ff98;
+    text-decoration: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+
+/* Box sizing (helps consistent widths) */
+* { box-sizing: border-box; }
+
+/* Page background */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eaf6ff;
+  margin: 0;
+}
+
+/* Form container */
+.form-container {
+  max-width: 520px;
+  background: #fff;
+  padding: 22px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(3, 24, 58, 0.06);
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  margin: 0 0 18px;
+  color: #07214b;
+}
+
+/* Field label (top labels) */
+.field-label {
+  display: block;
+  margin-top: 14px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Inputs and textarea */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 8px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #111;
+}
+
+/* Checkbox group: one item per line, checkbox right next to the text */
+.checkbox-group {
+  margin-top: 8px;
+}
+
+/* IMPORTANT: label wraps the input element in HTML.
+   Use this style so the checkbox and the text stay tightly together. */
+.checkbox-group label,
+.agree {
+  display: flex;
+  align-items: center;
+  gap: 10px;             /* space between checkbox and text */
+  margin-bottom: 8px;    /* space between lines */
+  cursor: pointer;
+  user-select: none;
+  font-weight: 400;
+  color: #111;
+}
+
+/* Make the checkbox itself compact and aligned */
+.checkbox-group input[type="checkbox"],
+.agree input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;             /* no extra margin that pushes text away */
+  flex: 0 0 auto;        /* don't let checkbox grow or shrink */
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 11px;
+  margin-top: 16px;
+  background-color: #07214b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* Small screens: reduce container padding */
+@media (max-width: 420px) {
+  .form-container { padding: 14px; }
+}
+
+
+
+
+
+.footer {
+background-color: #051650;
+color: #ffffff;
+text-align: center;
+padding: 25px 15px;
+font-family: Arial, sans-serif;
+ }
+.footer-content h3 {
+margin: 0;
+font-size: 1.3rem;
+}
+
+
+.footer-content p {
+margin: 6px 0 0;
+color: #d0dcff;
+font-size: 0.95rem;
+}
+
+
+.footer-bottom {
+margin-top: 10px;
+padding-top: 10px;
+font-size: 0.85rem;
+color: #d0dcff;
+} 

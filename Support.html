@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Support Page</title>
+        <link rel="stylesheet" type="text/css" href="Support.css">
+
+    </head>
+    <body>
+        <div class="nav-bar">
+        <ul>
+            <li class="b">Pawfect Match </li>
+            <div class="nav-links">
+            <li><a href="Page1.html">Home</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="Vol.html">Volunteering</a></li>
+            <li><a href="#">Support</a></li>
+            </div>
+        </ul>
+        </div>
+
+    <div class="main-content-layout">
+    <section class="intro">
+    <p>
+      At Pawfect Match, we believe every pet deserves love and a forever home. 
+      Your support helps us provide care, food, and shelter to animals in need.
+    </p>
+    <p>
+      If you’d like to <strong>get in touch</strong>, or <strong>share suggestions</strong> 
+      to help us improve, please fill out the form below — we’d love to hear from you!
+    </p>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+  </div>
+
+
+        <div>
+        <footer class="footer">
+        <div class="footer-content">
+        <h3>Pawfect Match</h3>
+        <p>Connecting pets with loving homes.</p>
+        </div>
+        <div class="footer-bottom">
+        <p>© <span id="year"></span> Pawfect Match. All Rights Reserved.</p>
+        </div>
+        </footer>
+
+
+        <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>
