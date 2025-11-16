@@ -45,7 +45,7 @@ a:hover {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .back{
-    background-color: white;
+    background-color: #e3f2fd;
 }
 
 
@@ -67,6 +67,34 @@ color: #00796b;
   color: #051650;
 }
 
+
+.dog-section {
+    display: flex;
+    align-items: center;      /* Align dog + text vertically */
+    justify-content: center;  /* Keep the whole block centered */
+    margin-top: 80px;
+}
+
+.dog-left .dog-img {
+    width: 380px;             /* Adjust if you want bigger/smaller */
+}
+
+.dog-right {
+    margin-left: 150px;        /* Space between dog and text */
+    max-width: 500px;
+}
+
+.dog-right h2 {
+    font-size: 32px;
+    font-family: 'Georgia', serif;
+    color: #003638;
+    margin-bottom: 15px;
+}
+
+.small-icon {
+    width: 200px;
+    height: auto;
+}
 
 .review-container {
   display: flex;
