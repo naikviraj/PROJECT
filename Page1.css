@@ -45,7 +45,32 @@ a:hover {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .back{
-    background-color: #e3f2fd;
+        /* Background image for Page1. Place your image at: PROJECT/IMAGES/homebg.jpg
+             or update the URL below to match your file name. */
+        --bg-zoom: 100%; /* lower = more zoomed-out (shows more of the image). Change this value to taste. */
+        background-image: url('IMAGES/homebg.jpg');
+        /* Use percentage width for the image so it's easier to "zoom out" by reducing --bg-zoom */
+        background-size: var(--bg-zoom) auto;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        /* fallback color while image loads or if missing */
+        background-color: #e3f2fd;
+        position: relative; /* needed for overlay pseudo-element */
+}
+
+/* On small screens use cover to avoid large empty margins when image is small */
+@media (max-width:700px) {
+    .back { background-size: cover; background-attachment: scroll; }
+}
+
+/* subtle overlay so text remains readable over busy images */
+.back::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* background: rgba(255,255,255,0.25); */
+    pointer-events: none;
 }
 
 
