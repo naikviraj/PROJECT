@@ -81,12 +81,43 @@ color: #00796b;
         border-radius: 16px;
         box-shadow: 0 18px 38px rgba(3,44,76,0.08);
         transform-origin: center;
-        transition: transform 420ms ease;
+        transition: transform 420ms ease, box-shadow 320ms ease;
+        position: relative; /* bring above the glass overlay */
+        z-index: 2;
+}
+
+/* Glass blur for the dog card background while keeping the dog image sharp */
+.dog-left {
+    position: relative;
+}
+.dog-left::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.26); /* fallback translucent layer */
+    pointer-events: none;
+    z-index: 1; /* below the image (which has z-index:2) */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transition: backdrop-filter 260ms ease, background 260ms ease;
+}
+.dog-left:hover::before {
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.18);
 }
 
 /* Hero card look */
 .hero-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+    /* patterned background with a soft white overlay so text stays readable
+       Place your image at: PROJECT/IMAGES/paw-pattern.png */
+    background:
+        linear-gradient(180deg, rgba(255, 240, 240, 0.527), rgba(255,255,255,0.72)),
+        url('IMAGES/herobg.png');
+    background-repeat: repeat;
+    background-position: center top;
+    background-size: 520px; /* tune this for pattern scale */
     border-radius: 18px;
     padding: 28px 32px;
     max-width: 1100px;
@@ -104,7 +135,6 @@ color: #00796b;
     color: #0b6f63; /* keeps the green tone */
     font-family: 'Baloo 2', Georgia, 'Times New Roman', Times, serif;
     letter-spacing: -0.6px;
-    text-shadow: 0 2px 0 rgba(255,255,255,0.65);
     transform-origin: left center;
     animation: heroTitleIn 700ms cubic-bezier(.2,.9,.2,1) both;
 }
