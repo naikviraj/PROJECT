@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pawfect Match — Pets</title>
-    <link rel="stylesheet" href="Pets.css">
+    <link rel="stylesheet" href="pets.css">
 </head>
 <body>
     <header class="nav-bar">
@@ -19,7 +20,7 @@
     </header>
 
     <main class="container">
-        <h1>Available Pets</h1>
+        <h1 class="page-title">Available Pets</h1>
 
         <section class="filters">
             <div class="type-filters">
@@ -35,13 +36,12 @@
                 </select>
             </div>
 
-            <div class="search-filter">
+            <div class="search-filter" style="margin-left:auto">
                 <input id="searchInput" placeholder="Search by name..." />
             </div>
         </section>
 
         <section id="petsGrid" class="pets-grid">
-            <!-- Example pet cards. Add or remove cards as needed. -->
             <article class="pet-card" data-type="dog" data-species="labrador">
                 <img src="./IMAGES/dog5.png" alt="Buddy (Labrador)">
                 <h3>Buddy</h3>
@@ -97,7 +97,6 @@
     </footer>
 
     <script>
-    // Populate species select from pets in grid and handle filtering
     (function() {
         const petsGrid = document.getElementById('petsGrid');
         const speciesSelect = document.getElementById('speciesSelect');
@@ -146,7 +145,6 @@
             });
         }
 
-        // initial build
         rebuildSpeciesOptions('all');
         applyFilters();
 

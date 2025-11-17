@@ -3,6 +3,8 @@
     <head>
         <title>Pet Adoption website</title>
         <link rel="stylesheet" type="text/css" href="Page1.css">
+        <!-- Cute fonts for hero title and subtitle -->
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     </head>
     <body class="back">
@@ -27,19 +29,29 @@
         </h1>
         </div>
 
-        <div class="dog-section">
+        <div class="dog-section hero-card">
     <div class="dog-left">
-        <img src="../IMAGES/dog5.png" alt="dog" class="dog-img">
+        <img src="../PROJECT/IMAGES/dog5.png" alt="dog" class="dog-img">
     </div>
 
     <div class="dog-right">
-        <h2>Guaranteed furever friends. Find your Pawfect Match today!</h2>
-         <a href="pets.html">
-        <img src="../IMAGES/logo1.png"  width="80px" height="50px"
-             alt="paw icon" 
-             class="small-icon">
-             </a>
-             
+        <h2 class="hero-title">Guaranteed furever friends. Find your Pawfect Match today!</h2>
+        <p class="hero-sub"><span class="typewriter" aria-live="polite"></span></p>
+
+        <div class="cta-row">
+            <a class="btn-cta" href="pets.html" aria-label="Browse pets">
+                <img src="../PROJECT/IMAGES/adoptme.png" alt="Browse pets" class="browse-img">
+            </a>
+            <a class="btn-help" href="Support.html" aria-label="How to help">
+                <img src="../PROJECT/IMAGES/howtohelp.png" alt="How to Help" class="help-img">
+            </a>
+        </div>
+
+        <!-- <div class="paw-row" aria-hidden="true">
+            <span class="paw-emoji">🐾</span>
+            <span class="paw-emoji">🐾</span>
+            <span class="paw-emoji">🐾</span>
+        </div> -->
     </div>
 </div>
 
@@ -77,7 +89,63 @@
 
 
         <script>
+        // set footer year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Improved multi-phrase typewriter:
+        // - types each phrase char-by-char
+        // - pauses for readability
+        // - fades out the whole span and clears it, then types the next phrase
+        // This prevents abrupt line-height jumps when long phrases wrap to multiple lines.
+        (function(){
+            const phrases = [
+                'Discover friendly, vaccinated pets ready for a loving home.',
+                'Browse profiles, meet your match and adopt with confidence.',
+                'Trained, healthy, and full of cuddles — find your companion today!'
+            ];
+
+            const el = document.querySelector('.typewriter');
+            if (!el) return;
+
+            const typingSpeed = 28; // ms per char
+            const pauseAfter = 1300; // ms to pause after typing a phrase
+            const fadeDuration = 200; // should match CSS transition
+
+            let phraseIndex = 0;
+
+            function sleep(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
+
+            async function typePhrase(phrase){
+                for (let i = 0; i < phrase.length; i++){
+                    el.textContent = phrase.slice(0, i+1);
+                    await sleep(typingSpeed);
+                }
+            }
+
+            async function run(){
+                while(true){
+                    const current = phrases[phraseIndex];
+                    // ensure visible state
+                    el.classList.remove('fade-out');
+                    // type the phrase
+                    await typePhrase(current);
+                    // pause so user can read
+                    await sleep(pauseAfter);
+                    // fade out whole span to avoid layout collapse during deletion
+                    el.classList.add('fade-out');
+                    await sleep(fadeDuration);
+                    // clear text and advance
+                    el.textContent = '';
+                    el.classList.remove('fade-out');
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    // small pause before typing next phrase
+                    await sleep(180);
+                }
+            }
+
+            // start after small delay so layout is ready
+            setTimeout(run, 700);
+        })();
         </script>
       
     </body>

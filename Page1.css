@@ -69,15 +69,150 @@ color: #00796b;
 
 
 .dog-section {
-    display: flex;
-    align-items: center;      /* Align dog + text vertically */
-    justify-content: center;  /* Keep the whole block centered */
-    margin-top: 80px;
+        display: flex;
+        align-items: center;      /* Align dog + text vertically */
+        justify-content: center;  /* Keep the whole block centered */
+        margin-top: 50px;
 }
 
 .dog-left .dog-img {
-    width: 380px;             /* Adjust if you want bigger/smaller */
+        width: 300px;             /* slightly smaller so it doesn't dominate */
+        max-width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 18px 38px rgba(3,44,76,0.08);
+        transform-origin: center;
+        transition: transform 420ms ease;
 }
+
+/* Hero card look */
+.hero-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+    border-radius: 18px;
+    padding: 28px 32px;
+    max-width: 1100px;
+    margin: 28px auto;
+    box-shadow: 0 12px 36px rgba(2,40,70,0.06);
+    display: flex;
+    gap: 36px;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 40px;
+    line-height: 1.02;
+    margin: 0 0 10px 0;
+    color: #0b6f63; /* keeps the green tone */
+    font-family: 'Baloo 2', Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: -0.6px;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.65);
+    transform-origin: left center;
+    animation: heroTitleIn 700ms cubic-bezier(.2,.9,.2,1) both;
+}
+.hero-sub {
+    margin: 0 0 16px 0;
+    color: #073c39;
+    opacity: 0.95;
+    max-width: 520px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    animation: heroSubIn 900ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* Typewriter container must allow wrapping and stay within hero card */
+.typewriter {
+    display: inline-block;
+    white-space: normal;      /* allow wrapping */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    vertical-align: middle;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.25; /* consistent line height for predictable wrapping */
+    /* Reserve enough space so switching phrases doesn't suddenly change layout */
+    min-height: calc(1.25em * 2.4); /* ~2.4 lines worth of height; adjust if you want more/less */
+    transition: opacity 200ms ease, transform 200ms ease;
+}
+.typewriter::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 8px;
+    color: #0b6f63;
+    animation: caretBlink 1s steps(1) infinite;
+}
+/* Fade helper used during phrase switch to avoid abrupt deleting visual shifts */
+.typewriter.fade-out {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+@keyframes caretBlink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+
+.cta-row { display: flex; gap: 12px; align-items: center; margin-top: 6px; }
+.btn-cta {
+    /* background: linear-gradient(90deg,#f4511e,#ff8a65); */
+    /* color: #fff; */
+    padding: 8px; /* reduced to fit image */
+    /* border-radius: 10px; */
+    text-decoration: none;
+    /* font-weight: 700; */
+    /* box-shadow: 0 10px 26px rgba(5,22,80,0.12); */
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.btn-cta:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(5,22,80,0.16); }
+.btn-cta:active { transform: translateY(-2px); }
+.btn-cta:focus { outline: 3px solid rgba(5,22,80,0.12); }
+
+.btn-ghost {
+    background: transparent;
+    color: #051650;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 2px solid rgba(5,22,80,0.06);
+    text-decoration: none;
+}
+
+.paw-row { margin-top: 14px; }
+.paw-emoji { font-size: 20px; margin-right: 8px; opacity: 0.92; transform: translateY(0); display: inline-block; }
+.paw-emoji:nth-child(1) { animation: wag 3.2s ease-in-out infinite 0.2s; }
+.paw-emoji:nth-child(2) { animation: wag 3.2s ease-in-out infinite 0.4s; }
+.paw-emoji:nth-child(3) { animation: wag 3.2s ease-in-out infinite 0.6s; }
+@keyframes wag { 0% { transform: translateY(0); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+
+@keyframes heroTitleIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes heroSubIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* image used in place of Browse Pets button */
+.browse-img {
+    width: 100px;
+    height: auto;
+    display: block;
+    /* border-radius: 10px; */
+    /* box-shadow: 0 8px 22px rgba(5,22,80,0.12); */
+}
+.btn-cta:hover .browse-img { transform: scale(1.03); }
+
+/* Help image (replaces How to Help) - make behaviour identical to Browse Pets */
+.btn-help {
+    /* match .btn-cta behavior */
+    padding: 8px; /* same padding as btn-cta */
+    text-decoration: none;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    display: inline-block;
+}
+.btn-help:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(5,22,80,0.16); }
+.btn-help:active { transform: translateY(-2px); }
+.btn-help:focus { outline: 3px solid rgba(5,22,80,0.12); }
+.help-img { width: 100px; height: auto; display: block; transition: transform 180ms ease, box-shadow 180ms ease; }
+.btn-help:active .help-img { transform: scale(1.01); }
+.btn-help:focus-visible .help-img { outline: 2px solid rgba(5,22,80,0.12); outline-offset: 4px; }
 
 .dog-right {
     margin-left: 150px;        /* Space between dog and text */
