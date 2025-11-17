@@ -1,36 +1,64 @@
 /* Styles for auth page, using the same color palette as Page1.css */
 .auth-wrapper {
-  max-width: 700px;
+  max-width: 860px;
   margin: 40px auto;
-  padding: 24px;
-  background: linear-gradient(180deg, rgba(255,214,165,0.9), rgba(255,255,255,0.85));
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  border: 2px dotted rgba(0,0,0,0.12);
+  padding: 28px;
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(6px) saturate(120%);
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(6,20,40,0.12);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 
-.role-toggle { display:flex; gap:12px; justify-content:center; margin-bottom:14px; }
-.role-btn { background:#051650; color:#fff; border:none; padding:10px 18px; border-radius:8px; cursor:pointer; font-size:16px; }
-.role-btn.active { background:#FFD6A5; color:#051650; font-weight:bold; }
+.role-toggle { display:flex; justify-content:center; margin:18px 0 22px; }
+.role-toggle .segmented { display:inline-grid; grid-template-columns:repeat(2,1fr); gap:4px; background: rgba(6,20,40,0.04); padding:6px; border-radius:999px; }
+.role-btn { background:transparent; color:#062040; border:none; padding:10px 26px; border-radius:999px; cursor:pointer; font-size:16px; min-width:120px; transition: transform 200ms ease, box-shadow 200ms ease, background 180ms ease, color 140ms ease; }
+.role-btn::before { content: ''; display:inline-block; width:18px; height:18px; margin-right:8px; vertical-align:middle; }
+.role-btn.user::before { content: "\1F464"; /* person emoji fallback */ }
+.role-btn.admin::before { content: "\2699"; }
+.role-btn.active { background: linear-gradient(90deg,#ff9f43,#ffd6a5); color:#07203a; font-weight:800; box-shadow: 0 12px 30px rgba(6,20,40,0.12); transform: translateY(-2px); }
 
-.sub-toggle { display:flex; gap:10px; justify-content:center; margin:10px 0 18px; }
-.sub-btn { background:transparent; border:2px solid transparent; padding:8px 14px; border-radius:8px; cursor:pointer; }
-.sub-btn.active { background:#051650; color:#fff; }
+.sub-toggle { display:flex; gap:10px; justify-content:center; margin:8px 0 16px; }
+.sub-btn { background:transparent; border:1px solid rgba(6,20,40,0.08); padding:8px 14px; border-radius:8px; cursor:pointer; transition: background 180ms ease, color 180ms ease, transform 160ms ease; }
+.sub-btn.active { background:#051650; color:#fff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(3,44,76,0.08); }
 
-.form-box { max-width:420px; margin:0 auto 10px; }
+.form-box { max-width:460px; margin:10px auto; background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98)); padding: 18px; border-radius: 12px; box-shadow: 0 12px 30px rgba(6,20,40,0.06); border:1px solid rgba(6,20,40,0.03); }
 .form-box form { display:flex; flex-direction:column; gap:10px; }
 .form-box label { font-weight:600; color:#333; }
 .form-box input[type="text"],
 .form-box input[type="email"],
 .form-box input[type="password"] {
-  padding:10px 12px; border-radius:8px; border:1px solid #ccc; font-size:15px;
+  padding:12px 14px; border-radius:8px; border:1px solid rgba(6,20,40,0.08); font-size:15px; background: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
-.form-box input:focus { outline:none; border-color:#051650; box-shadow:0 0 0 3px rgba(5,22,80,0.08); }
+.form-box input:focus { outline:none; border-color:#ff9f43; box-shadow:0 6px 20px rgba(255,159,67,0.08); }
 
-.primary { background:#051650; color:#fff; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; font-size:16px; }
-.primary:hover { background:#07306f; }
+.primary { background: linear-gradient(90deg,#ff7a1a,#ffb86b); color:#07203a; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-size:16px; font-weight:700; box-shadow: 0 8px 26px rgba(255,122,26,0.12); transition: transform 160ms ease, box-shadow 160ms ease; }
+.primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(255,122,26,0.14); }
 
 .hidden { display:none; }
+
+/* Section title styling */
+.section-title { text-align:center; font-size:22px; letter-spacing:0.4px; color:#05203a; margin-bottom:6px; }
+
+/* Small responsive tweaks */
+@media (max-width:700px) {
+  .auth-wrapper { padding:18px; }
+  .form-box { max-width:100%; margin:8px 12px; }
+  .role-toggle .segmented { width:100%; }
+}
+
+/* Layout: role areas appear as cards side-by-side on wide screens */
+.role-area { transition: opacity 260ms ease, transform 260ms ease; }
+@media (min-width:900px) {
+  .role-area { display: block; }
+  .role-area.hidden { display: none; }
+}
+
+/* Small responsive tweak: center content on mobile */
+@media (max-width:600px) {
+  .role-toggle { flex-wrap:wrap; }
+  .role-btn { min-width: 140px; }
+}
 
 @media (max-width:600px) {
   .auth-wrapper { margin: 20px; padding:16px; }
