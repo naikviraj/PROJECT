@@ -73,39 +73,76 @@ a:hover {
 /* FILTER SECTION */
 .filters {
     display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 18px 0;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 8px 28px rgba(6,30,70,0.08);
+    justify-content: space-between;
+}
+
+.type-filters {
+    display: flex;
     gap: 12px;
     align-items: center;
-    margin: 18px 0;
-    padding: 12px;
-    border-radius: 10px;
-    background: #ffffffcc;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
 }
 
-.type-filters label {
+.type-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 999px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: transparent;
+    gap: 10px;
+    font-weight: 700;
     cursor: pointer;
-    font-weight: 600;
-    color: #333;
+    color: #1f2937;
 }
+
+.type-btn::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #9ac0ff;
+    background: #fff;
+    display: inline-block;
+}
+
+.type-btn.active {
+    background: #f4f9ff;
+    border: 1px solid rgba(104,160,255,0.15);
+}
+
+.type-btn.active::before {
+    background: #2b78ff;
+    border-color: #2b78ff;
+}
+
+.species-group{ display:flex; align-items:center; gap:10px; margin-left:8px }
+.species-label{ font-weight:700; color:#1f2937 }
 
 #speciesSelect {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #e6eefc;
     background: #fff;
+    min-width: 180px;
 }
 
+/* search input floats to the right */
 #searchInput {
-    padding: 10px 14px;
-    width: 220px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 1px solid #e6eefc;
+    min-width: 300px;
+    margin-left: auto;
+    box-shadow: 0 6px 18px rgba(6,30,70,0.04);
 }
 
 /* PET CARDS */
@@ -125,6 +162,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
 }
 
 .pet-card img {
@@ -150,6 +188,61 @@ a:hover {
     margin: 0 0 8px 0;
     color: #333;
 }
+
+/* Flash messages */
+.flash{padding:12px 16px;border-radius:10px;margin-bottom:16px;max-width:1100px;margin-left:auto;margin-right:auto}
+.flash-success{background:linear-gradient(90deg,#ecffef,#f0fff5);color:#0a7a3a;border:1px solid #ccf3d6}
+.flash-error{background:#ffecec;color:#b00020;border:1px solid #ffd6d6}
+
+/* Adopt button */
+.adopt-form { margin-top: 12px }
+.adopt-btn {
+    display: inline-block;
+    background: linear-gradient(90deg,#2b78ff 0%,#5bb6ff 100%);
+    color: #fff;
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(43,120,255,0.18);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.adopt-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(43,120,255,0.24); }
+.adopt-btn:active { transform: translateY(0); opacity: 0.95 }
+.adopt-btn[disabled]{ opacity: .6; cursor: not-allowed }
+
+/* Inline animated toast inside pet card */
+.card-toast{
+    margin-top:10px;
+    padding:8px 12px;
+    border-radius:10px;
+    background:linear-gradient(90deg,#f0fff5,#ecffef);
+    color:#0a7a3a;
+    border:1px solid #ccf3d6;
+    font-weight:700;
+    opacity:0;
+    transform: translateY(-8px) scale(0.98);
+    transition: transform .28s cubic-bezier(.2,.9,.3,1), opacity .28s ease;
+    will-change: transform, opacity;
+}
+.card-toast.show{ opacity:1; transform: translateY(0) scale(1); }
+
+/* Visible success state that replaces the adopt button after adoption */
+.adopt-success {
+    display: inline-block;
+    background: linear-gradient(90deg,#1fb97a 0%,#5be6a9 100%);
+    color: #fff;
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: default;
+    box-shadow: 0 8px 18px rgba(31,185,122,0.16);
+}
+
+/* Fade out and collapse the card when removing (kept for potential future use) */
+.pet-card.removing{ transition: opacity .36s ease, transform .36s ease; opacity:0; transform: scale(.98); height:0; padding:0; margin:0; overflow:hidden }
 
 /* FOOTER (same as Page1) */
 .footer {
@@ -189,4 +282,18 @@ a:hover {
     #searchInput {
         width: 100%;
     }
+}
+
+/* small badge shown on the card when adoption was requested */
+.adopt-badge{
+    max-width: 1100px;
+    margin: 12px auto;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#ecffef,#f0fff5);
+    color: #0a7a3a;
+    border: 1px solid #ccf3d6;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(31,185,122,0.12);
 }

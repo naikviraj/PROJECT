@@ -16,15 +16,16 @@ if ($email === '' || $password === '') {
 
 try {
     $pdo = getPDO();
-    // Using table `user_register` which holds registered users
-    $stmt = $pdo->prepare('SELECT id, password_hash FROM user_register WHERE email = ? LIMIT 1');
+    // Using table `users` which holds registered users
+    $stmt = $pdo->prepare('SELECT id, password_hash FROM users WHERE email = ? LIMIT 1');
     $stmt->execute([$email]);
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password_hash'])) {
         session_start();
+        session_regenerate_id(true);
         $_SESSION['user_id'] = $user['id'];
-        header('Location: Page1.html');
+        header('Location: Page1.php');
         exit;
     }
 

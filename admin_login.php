@@ -17,13 +17,14 @@ if ($username === '' || $password === '') {
 try {
     $pdo = getPDO();
 
-    // Using your existing `admin_login` table (columns: id, username, password_hash)
-    $stmt = $pdo->prepare('SELECT id, password_hash FROM admin_login WHERE username = ? LIMIT 1');
+    // Using `admins` table (columns: id, username, password_hash)
+    $stmt = $pdo->prepare('SELECT id, password_hash FROM admins WHERE username = ? LIMIT 1');
     $stmt->execute([$username]);
     $admin = $stmt->fetch();
 
     if ($admin && password_verify($password, $admin['password_hash'])) {
         session_start();
+        session_regenerate_id(true);
         $_SESSION['admin_id'] = $admin['id'];
         header('Location: admin_dashboard.php');
         exit;

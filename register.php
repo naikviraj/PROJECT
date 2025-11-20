@@ -31,8 +31,8 @@ if (strlen($password) < 6) {
 try {
     $pdo = getPDO();
 
-    // Check if email already exists (table: user_register)
-    $stmt = $pdo->prepare('SELECT id FROM user_register WHERE email = ? LIMIT 1');
+    // Check if email already exists (table: users)
+    $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
         header('Location: auth.html?error=exists');
@@ -41,15 +41,11 @@ try {
 
     // Hash password and insert
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $pdo->prepare('INSERT INTO user_register (name, email, password_hash) VALUES (?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
     $stmt->execute([$name, $email, $hash]);
 
-    // Start session securely and log user in
-    session_start();
-    session_regenerate_id(true);
-    $_SESSION['user_id'] = $pdo->lastInsertId();
-
-    header('Location: Page1.html?registered=1');
+    // Do NOT auto-login the user. Redirect to login page so they can sign in.
+    header('Location: auth.html?registered=1');
     exit;
 } catch (Exception $e) {
     error_log('Register error: ' . $e->getMessage());

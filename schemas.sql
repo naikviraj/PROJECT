@@ -1,0 +1,44 @@
+-- Users table (registered adopters)
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Admins table
+CREATE TABLE IF NOT EXISTS admins (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Pets table
+CREATE TABLE IF NOT EXISTS pets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  admin_id INT DEFAULT NULL,
+  name VARCHAR(200) NOT NULL,
+  `type` ENUM('dog','cat') NOT NULL DEFAULT 'dog',
+  breed VARCHAR(200) DEFAULT '',
+  age INT DEFAULT 0,
+  description TEXT,
+  image_path VARCHAR(512) DEFAULT NULL,
+  is_published TINYINT(1) DEFAULT 0,
+  is_adopted TINYINT(1) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  published_at TIMESTAMP NULL,
+  FOREIGN KEY (admin_id) REFERENCES admins(id) ON DELETE SET NULL
+);
+
+-- Adoptions table (records who adopted which pet and when)
+CREATE TABLE IF NOT EXISTS adoptions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  pet_id INT NOT NULL,
+  user_id INT NOT NULL,
+  adopted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (pet_id) REFERENCES pets(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
