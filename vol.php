@@ -5,6 +5,7 @@ $db = getPDO();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    // Basic form fields
     $name       = $_POST['name'] ?? '';
     $email      = $_POST['email'] ?? '';
     $phone      = $_POST['phone'] ?? '';
@@ -12,34 +13,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hours      = $_POST['hours'] ?? '';
     $motivation = $_POST['motivation'] ?? '';
 
-    $days    = isset($_POST['days']) ? implode(", ", $_POST['days']) : "";
-    $comfort = isset($_POST['comfort']) ? implode(", ", $_POST['comfort']) : "";
-    $areas   = isset($_POST['areas']) ? implode(", ", $_POST['areas']) : "";
+    // Checkbox arrays — convert to comma-separated strings
+    $days    = isset($_POST['days']) ? implode(", ", $_POST['days']) : '';
+    $comfort = isset($_POST['comfort']) ? implode(", ", $_POST['comfort']) : '';
+    $areas   = isset($_POST['areas']) ? implode(", ", $_POST['areas']) : '';
 
-    $sql = "INSERT INTO volunteering
-            ($name, $email, $phone, $address, $days, $hours, $comfort, $areas, $motivation)
-            VALUES
-            (:full_name, :email, :ph_number, :address, :days, :hours_per_week, :comfort_with_dogs, :vol_areas, :why_volunteer)";
+    // Insert data
+    $sql = "INSERT INTO volunteering 
+            (name, email, phone, address, days, hours, comfort, areas, motivation)
+            VALUES (:name, :email, :phone, :address, :days, :hours, :comfort, :areas, :motivation)";
 
-    try {
-        $stmt = $db->prepare($sql);
+    $stmt = $db->prepare($sql);
 
-        $stmt->execute([
-            ':full_name'         => $name,
-            ':email'             => $email,
-            ':ph_number'         => $phone,
-            ':address'           => $address,
-            ':days'              => $days,
-            ':hours_per_week'    => $hours,
-            ':comfort_with_dogs' => $comfort,
-            ':vol_areas'         => $areas,
-            ':why_volunteer'     => $motivation
-        ]);
+    $stmt->execute([
+        ':name'       => $name,
+        ':email'      => $email,
+        ':phone'      => $phone,
+        ':address'    => $address,
+        ':days'       => $days,
+        ':hours'      => $hours,
+        ':comfort'    => $comfort,
+        ':areas'      => $areas,
+        ':motivation' => $motivation
+    ]);
 
-        echo "Form submitted successfully!";
-    } 
-    catch (PDOException $e) {
-        echo "SQL Error: " . $e->getMessage();
-    }
+    echo "Your volunteering form has been submitted successfully!";
 }
 ?>
