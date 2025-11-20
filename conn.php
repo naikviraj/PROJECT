@@ -3,7 +3,7 @@
 // When you run this on XAMPP, update DB_NAME, DB_USER and DB_PASS accordingly.
 define('DB_HOST', '127.0.0.1');
 define('DB_PORT', '3306');
-define('DB_NAME', 'your_database'); // <- change to your DB name
+define('DB_NAME', 'petadopt'); // <- change to your DB name
 define('DB_USER', 'root');          // <- change if needed
 define('DB_PASS', '');              // <- change if needed
 

@@ -20,7 +20,7 @@
     <div class="form-container">
     <h2>Volunteer With Us</h2>
 
-    <form>
+    <form action="vol.php" method="POST">
 
       <label class="field-label">Full Name:</label>
       <input type="text" name="name" required>
@@ -36,13 +36,13 @@
 
       <label class="field-label">Days Available:</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="days" value="mon"> Monday</label>
-        <label><input type="checkbox" name="days" value="tue"> Tuesday</label>
-        <label><input type="checkbox" name="days" value="wed"> Wednesday</label>
-        <label><input type="checkbox" name="days" value="thu"> Thursday</label>
-        <label><input type="checkbox" name="days" value="fri"> Friday</label>
-        <label><input type="checkbox" name="days" value="sat"> Saturday</label>
-        <label><input type="checkbox" name="days" value="sun"> Sunday</label>
+        <label><input type="checkbox" name="days[]" value="mon"> Monday</label>
+        <label><input type="checkbox" name="days[]" value="tue"> Tuesday</label>
+        <label><input type="checkbox" name="days[]" value="wed"> Wednesday</label>
+        <label><input type="checkbox" name="days[]" value="thu"> Thursday</label>
+        <label><input type="checkbox" name="days[]" value="fri"> Friday</label>
+        <label><input type="checkbox" name="days[]" value="sat"> Saturday</label>
+        <label><input type="checkbox" name="days[]" value="sun"> Sunday</label>
       </div>
 
       <label class="field-label">Hours per Week:</label>
@@ -50,28 +50,22 @@
 
       <label class="field-label">Comfortable With:</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="comfort" value="dogs"> Dogs</label>
-        <label><input type="checkbox" name="comfort" value="cats"> Cats</label>
-        <label><input type="checkbox" name="comfort" value="both"> Both</label>
+        <label><input type="checkbox" name="comfort[]" value="dogs"> Dogs</label>
+        <label><input type="checkbox" name="comfort[]" value="cats"> Cats</label>
+        <label><input type="checkbox" name="comfort[]" value="both"> Both</label>
       </div>
 
       <label class="field-label">Volunteering Areas (Select multiple):</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="areas" value="care"> Animal Care</label>
-        <label><input type="checkbox" name="areas" value="walk"> Walking/Exercise</label>
-        <label><input type="checkbox" name="areas" value="events"> Events</label>
-        <label><input type="checkbox" name="areas" value="clean"> Cleaning</label>
-        <label><input type="checkbox" name="areas" value="social"> Social Media</label>
+        <label><input type="checkbox" name="areas[]" value="care"> Animal Care</label>
+        <label><input type="checkbox" name="areas[]" value="walk"> Walking/Exercise</label>
+        <label><input type="checkbox" name="areas[]" value="events"> Events</label>
+        <label><input type="checkbox" name="areas[]" value="clean"> Cleaning</label>
+        <label><input type="checkbox" name="areas[]" value="social"> Social Media</label>
       </div>
 
       <label class="field-label">Why do you want to volunteer?</label>
       <textarea name="motivation" rows="3"></textarea><br><br>
-
-      <!-- <label class="field-label">Emergency Contact Name:</label>
-      <input type="text" name="emg_name" required>
-
-      <label class="field-label">Emergency Contact Phone:</label>
-      <input type="text" name="emg_phone" required> <br><br> -->
 
       <label class="agree">
         <input type="checkbox" required> I agree to follow all shelter guidelines
