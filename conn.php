@@ -1,9 +1,9 @@
 <?php
 // DB connection using PDO. Edit the constants below for your environment.
 // When you run this on XAMPP, update DB_NAME, DB_USER and DB_PASS accordingly.
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', 'localhost');
 define('DB_PORT', '3306');
-define('DB_NAME', 'petadopt'); // <- change to your DB name
+define('DB_NAME', 'pet_adopt'); // <- change to your DB name
 define('DB_USER', 'root');          // <- change if needed
 define('DB_PASS', '');              // <- change if needed
 
