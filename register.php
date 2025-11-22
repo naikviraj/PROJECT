@@ -23,7 +23,11 @@ if (strlen($name) > 255) {
     header('Location: auth.html?error=name_too_long');
     exit;
 }
-if (strlen($password) < 6) {
+// stronger server-side password policy: at least 8 chars, upper, lower, digit
+if (strlen($password) < 8 ||
+    !preg_match('/[A-Z]/', $password) ||
+    !preg_match('/[a-z]/', $password) ||
+    !preg_match('/[0-9]/', $password)) {
     header('Location: auth.html?error=weak_password');
     exit;
 }
@@ -31,8 +35,8 @@ if (strlen($password) < 6) {
 try {
     $pdo = getPDO();
 
-    // Check if email already exists (table: users)
-    $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
+    // Check if email already exists (table: user_register)
+    $stmt = $pdo->prepare('SELECT id FROM user_register WHERE email = ? LIMIT 1');
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
         header('Location: auth.html?error=exists');
@@ -41,7 +45,7 @@ try {
 
     // Hash password and insert
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $pdo->prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO user_register (name, email, password_hash, created_at) VALUES (?, ?, ?, NOW())');
     $stmt->execute([$name, $email, $hash]);
 
     // Do NOT auto-login the user. Redirect to login page so they can sign in.

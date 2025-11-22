@@ -83,6 +83,12 @@
             </div>
         </footer>
 
+        <!-- toast container -->
+        <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden>
+            <div class="icon" aria-hidden="true">!</div>
+            <div id="toastMessage" class="message">Test</div>
+        </div>
+
         <script>
             document.getElementById('year2').textContent = new Date().getFullYear();
 
@@ -128,6 +134,87 @@
             adminBtn.addEventListener('click', showAdmin);
             uLoginBtn.addEventListener('click', showULogin);
             uRegisterBtn.addEventListener('click', showURegister);
+
+            // Toast helper
+            const toastEl = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            function showToast(message, type = 'info', timeout = 5500) {
+                toastMsg.textContent = message;
+                toastEl.classList.remove('success','error','info');
+                toastEl.classList.add(type);
+                toastEl.hidden = false;
+                toastEl.classList.add('show');
+                // set icon text based on type
+                const icon = toastEl.querySelector('.icon');
+                if (type === 'success') icon.textContent = '✓';
+                else if (type === 'error') icon.textContent = '⚠';
+                else icon.textContent = 'ℹ';
+
+                clearTimeout(toastEl._hideTimer);
+                toastEl._hideTimer = setTimeout(() => {
+                    toastEl.classList.remove('show');
+                    setTimeout(() => toastEl.hidden = true, 260);
+                }, timeout);
+            }
+
+            // Map server query params to friendly messages
+            (function handleQueryMessages() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('error')) {
+                    const code = params.get('error');
+                    const map = {
+                        'missing': 'Please fill out all fields.',
+                        'invalid_email': 'Please enter a valid email address.',
+                        'name_too_long': 'Full name is too long.',
+                        'weak_password': 'Password is too weak. Use at least 8 characters with uppercase, lowercase and a number.',
+                        'exists': 'An account with that email already exists. Please login instead.',
+                        'server': 'Server error. Please try again later.'
+                    };
+                    showToast(map[code] || 'An error occurred.', 'error');
+                    // remove query param so refresh doesn't re-show
+                    params.delete('error');
+                    history.replaceState(null, '', window.location.pathname + (params.toString() ? '?' + params.toString() : ''));
+                } else if (params.get('registered') === '1') {
+                    showToast('Registration successful. Please sign in.', 'success');
+                    params.delete('registered');
+                    history.replaceState(null, '', window.location.pathname + (params.toString() ? '?' + params.toString() : ''));
+                }
+            })();
+
+            // Client-side registration validation (mirrors server rules)
+            const regForm = document.querySelector('#uRegister form');
+            if (regForm) {
+                regForm.addEventListener('submit', function (e) {
+                    const name = (regForm.querySelector('[name="name"]').value || '').trim();
+                    const email = (regForm.querySelector('[name="email"]').value || '').trim();
+                    const password = regForm.querySelector('[name="password"]').value || '';
+
+                    if (!name || !email || !password) {
+                        e.preventDefault();
+                        showToast('Please fill out all fields.', 'error');
+                        return;
+                    }
+                    if (name.length > 255) {
+                        e.preventDefault();
+                        showToast('Full name is too long.', 'error');
+                        return;
+                    }
+                    // basic email sanity check
+                    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRe.test(email)) {
+                        e.preventDefault();
+                        showToast('Please enter a valid email address.', 'error');
+                        return;
+                    }
+                    // password strength: at least 8 chars, uppercase, lowercase, digit
+                    if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
+                        e.preventDefault();
+                        showToast('Password is too weak. Use at least 8 characters with uppercase, lowercase and a number.', 'error');
+                        return;
+                    }
+                    // allow submit (server will re-check)
+                });
+            }
 
             // No confirm-password check (single password field used)
         </script>
