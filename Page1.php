@@ -21,7 +21,7 @@ require_once __DIR__ . '/inc/header.php';
 
         <div class="dog-section hero-card">
     <div class="dog-left">
-        <img src="IMAGES/dogocat1.png" alt="dog" class="dog-img">
+        <img src="../IMAGES/dogocat1.png" alt="dog" class="dog-img">
     </div>
 
     <div class="dog-right">
@@ -35,6 +35,24 @@ require_once __DIR__ . '/inc/header.php';
         </div>
     </div>
 </div>
+
+<section class="reviews-section">
+        <h2 class="section-title">Happy Tails from Our Dog Parents 🐾</h2>
+        <div class="review-container">
+        <div class="review-box">
+        <p class="review-text">“Adopting Bruno changed our lives! He brings so much joy and energy into our home every day.”</p>
+        <p class="review-author">— Arya & Family</p>
+        </div>
+        <div class="review-box">
+        <p class="review-text">“We found our little Daisy here — the process was smooth and the volunteers were so caring!”</p>
+        <p class="review-author">— Devika Bansal</p>
+        </div>
+        <div class="review-box">
+        <p class="review-text">“Adopting Max was the best decision ever. He’s not just a pet — he’s family now.”</p>
+        <p class="review-author">— Chethna & Sanat</p>
+        </div>
+        </div>
+    </section>
 
     <?php include __DIR__ . '/inc/footer.php'; ?>
     </body>
